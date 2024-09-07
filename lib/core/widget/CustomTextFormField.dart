@@ -2,14 +2,13 @@ import 'package:ecommerce_app/core/colors/myAppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 class CustomTextFormField extends StatelessWidget{
-  String? label;
-  String hintText;
-  String? Function(String?)? validator;
-  TextEditingController controller=TextEditingController();
-  TextInputType keyboardType;
-  bool obscureText;
+   String? label;
+   String hintText;
+   String? Function(String?)? validator;
+   TextEditingController controller=TextEditingController();
+   TextInputType keyboardType;
+   bool obscureText;
   CustomTextFormField({required this.hintText,required this.validator,required this.controller
   , this.keyboardType=TextInputType.text,this.obscureText=false,this.label});
   @override
@@ -52,11 +51,15 @@ class CustomTextFormField extends StatelessWidget{
                   width: 2.w
               )
           ),
+          errorStyle: TextStyle(
+            color:Colors.amber
+          ),
           label: Text(label??'',style:
             TextStyle(
                 color: MyAppColors.whiteColor
             ),),
-          hintText: hintText ,hintStyle: TextStyle(
+          hintText: hintText ,
+            hintStyle: TextStyle(
           fontSize: 18.sp,
           color: MyAppColors.greyColor,
         )

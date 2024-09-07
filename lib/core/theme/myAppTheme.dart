@@ -25,8 +25,30 @@ class MyAppTheme{
       titleSmall:  TextStyle(
         color: MyAppColors.whiteColor,
         fontSize: 18.sp,
+      ),
+      bodySmall: TextStyle(
+          color: MyAppColors.primaryColor,
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w500
+      ),
+      bodyMedium: TextStyle(
+        color: MyAppColors.primaryColor,
+        fontSize: 14.sp,
+          fontWeight: FontWeight.w500
+
       )
 
-    )
-  );
+    ),
+
+    appBarTheme: AppBarTheme(
+      elevation: 0,
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: MyAppColors.primaryColor,
+      selectedItemColor: MyAppColors.whiteColor,
+      type: BottomNavigationBarType.fixed,
+
+    ));
+
+
 }

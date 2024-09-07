@@ -47,65 +47,75 @@ class RegisterScreen extends StatelessWidget{
         body: SingleChildScrollView(
           child: Padding(
             padding:  EdgeInsets.all(8.0.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 80.h,),
-                Center(child: Image.asset('assets/images/route_logo.png')),
-                SizedBox(height: 80.h,),
-                Text('Full Name' , style: GoogleFonts.poppins(
-                  textStyle: Theme.of(context).textTheme.titleMedium
-                ),) ,
-                CustomTextFormField(hintText: 'Full Name',
-                    validator: (value){
-                      AppValidator.validateFullName(value);
-                    },
-                    controller: viewModel.fullNameController),
-                SizedBox(height: 30.h,),
-                Text('Mobile Number' , style: GoogleFonts.poppins(
+            child: Form(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 80.h,),
+                  Center(child: Image.asset('assets/images/route_logo.png')),
+                  SizedBox(height: 80.h,),
+                  Text('Full Name' , style: GoogleFonts.poppins(
                     textStyle: Theme.of(context).textTheme.titleMedium
-                ),) ,
-                CustomTextFormField(hintText: 'Mobile Number',
-                    validator: (value){
-                      AppValidator.validatePhoneNumber(value);
+                  ),) ,
+                  CustomTextFormField(hintText: 'Full Name',
+                      validator: (value){
+                        return AppValidator.validateFullName(value);
+                      },
+                      controller: viewModel.fullNameController),
+                  SizedBox(height: 30.h,),
+                  Text('Mobile Number' , style: GoogleFonts.poppins(
+                      textStyle: Theme.of(context).textTheme.titleMedium
+                  ),) ,
+                  CustomTextFormField(hintText: 'Mobile Number',
+                      validator: (value){
+                        return AppValidator.validatePhoneNumber(value);
+                      },
+                      controller: viewModel.mobileNumberController),
+                  SizedBox(height: 30.h,),
+                  Text('E-mail address' , style: GoogleFonts.poppins(
+                      textStyle: Theme.of(context).textTheme.titleMedium
+                  ),)
+                  ,
+                  CustomTextFormField(hintText: 'E-mail address',
+                      validator: (value){
+                        return AppValidator.validateEmail(value);
+                      },
+                      controller: viewModel.emailController),
+                  SizedBox(height: 30.h,),
+                  Text('Password' , style: GoogleFonts.poppins(
+                      textStyle: Theme.of(context).textTheme.titleMedium
+                  ),) ,
+                  CustomTextFormField(hintText: 'Password',
+                      validator: (value){
+                        return AppValidator.validatePassword(value);
+                      },
+                      controller: viewModel.passwordController,
+                  obscureText: true,),
+                  SizedBox(height: 30.h,),
+                  Text('Confirm Password' , style: GoogleFonts.poppins(
+                      textStyle: Theme.of(context).textTheme.titleMedium
+                  ),) ,
+                  CustomTextFormField(hintText: 'Confirm Password',
+                      validator: (value){
+                        return AppValidator.validateConfirmPassword(value,viewModel.passwordController.text);
+                      },
+                      controller: viewModel.rePasswordController,
+                  obscureText: true,),
+                  SizedBox(height: 30.h,),
+                  CustomElevatedButton(
+                    label: 'Sign Up',
+                    onTap: () {
+                      final form = Form.of(context);
+                      if (form != null && form.validate()) {
+                        viewModel.register();
+                      } else {
+                      }
                     },
-                    controller: viewModel.mobileNumberController),
-                SizedBox(height: 30.h,),
-                Text('E-mail address' , style: GoogleFonts.poppins(
-                    textStyle: Theme.of(context).textTheme.titleMedium
-                ),)
-                ,
-                CustomTextFormField(hintText: 'E-mail address',
-                    validator: (value){
-                      AppValidator.validateEmail(value);
-                    },
-                    controller: viewModel.emailController),
-                SizedBox(height: 30.h,),
-                Text('Password' , style: GoogleFonts.poppins(
-                    textStyle: Theme.of(context).textTheme.titleMedium
-                ),) ,
-                CustomTextFormField(hintText: 'Password',
-                    validator: (value){
-                      AppValidator.validatePassword(value);
-                    },
-                    controller: viewModel.passwordController,
-                obscureText: true,),
-                SizedBox(height: 30.h,),
-                Text('Confirm Password' , style: GoogleFonts.poppins(
-                    textStyle: Theme.of(context).textTheme.titleMedium
-                ),) ,
-                CustomTextFormField(hintText: 'Confirm Password',
-                    validator: (value){
-                      AppValidator.validateConfirmPassword(value,viewModel.passwordController.text);
-                    },
-                    controller: viewModel.rePasswordController,
-                obscureText: true,),
-                SizedBox(height: 30.h,),
-                CustomElevatedButton(label: 'Sign Up', onTap: (){
-                  viewModel.register();
-                } , isStadiumBorder: false,)
-      
-              ],
+                    isStadiumBorder: false,)
+
+                ],
+              ),
             ),
           ),
         ),

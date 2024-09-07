@@ -1,15 +1,21 @@
 import 'package:ecommerce_app/core/theme/myAppTheme.dart';
 import 'package:ecommerce_app/features/auth_presentations_screens/login_screen/login_screen.dart';
+import 'package:ecommerce_app/features/main_screen/home_screen/cubit/home_tab_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'di.dart';
 import 'features/auth_presentations_screens/register_screen/register_screen.dart';
 import 'features/splash_screen/splash_screen.dart';
+import 'features/main_screen/main_screen.dart';
 
 void main() {
   configureDependencies();
-  runApp(const MyApp());
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider<HomeTabViewModel>(create: (context)=>getIt<HomeTabViewModel>())
+    ],
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -26,9 +32,10 @@ class MyApp extends StatelessWidget {
         routes: {
           SplashScreen.routeName:(context)=>SplashScreen(),
           RegisterScreen.routeName :(context)=>RegisterScreen(),
-          LoginScreen.routeName :(context)=>LoginScreen()
+          LoginScreen.routeName :(context)=>LoginScreen(),
+          MainScreen.routeName : (context)=> MainScreen()
         },
-        initialRoute: SplashScreen.routeName,
+        initialRoute: MainScreen.routeName,
         theme: MyAppTheme.appTheme,
       ),
     );

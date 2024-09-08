@@ -33,6 +33,7 @@ class CustomBrandsWidget extends StatelessWidget {
               child: Image.network(
                 dataEntity.image ?? '',
                 fit: BoxFit.cover,
+                width: double.infinity,
                 loadingBuilder: (context, child, progress) {
                   if (progress == null) {
                     return child;

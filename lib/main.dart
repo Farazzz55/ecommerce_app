@@ -8,6 +8,7 @@ import 'di.dart';
 import 'features/auth_presentations_screens/register_screen/register_screen.dart';
 import 'features/splash_screen/splash_screen.dart';
 import 'features/main_screen/main_screen.dart';
+import 'features/products_details_screen/product_details_screen.dart';
 
 void main() {
   configureDependencies();
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
           SplashScreen.routeName:(context)=>SplashScreen(),
           RegisterScreen.routeName :(context)=>RegisterScreen(),
           LoginScreen.routeName :(context)=>LoginScreen(),
+          ProductDetailsScreen.routeName:(context)=>ProductDetailsScreen(),
           MainScreen.routeName : (context)=> MainScreen()
         },
         initialRoute: MainScreen.routeName,

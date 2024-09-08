@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ecommerce_app/features/products_screen/cubit/products_screen_view_model.dart';
 import 'package:ecommerce_app/features/products_screen/widget/productItemWidget.dart';
+import 'package:ecommerce_app/features/products_details_screen/product_details_screen.dart';
 class ProductsScreen extends StatelessWidget{
   ProductsScreenViewModel viewModel=getIt<ProductsScreenViewModel>();
   @override
@@ -40,7 +41,12 @@ class ProductsScreen extends StatelessWidget{
                       scrollDirection: Axis.vertical,
                       itemCount: viewModel.productList.length,
                       itemBuilder: (context,index){
-                        return ProductItemWidget(productDataEntity: viewModel.productList[index],);
+                        return InkWell(
+                          onTap: (){
+                            Navigator.pushNamed(context,ProductDetailsScreen.routeName,
+                            arguments: viewModel.productList[index]);
+                          },
+                            child: ProductItemWidget(productDataEntity: viewModel.productList[index],));
                       }),
                 )
 

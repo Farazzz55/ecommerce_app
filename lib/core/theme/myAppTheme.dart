@@ -41,6 +41,20 @@ class MyAppTheme{
           fontSize: 12.sp,
           fontWeight: FontWeight.w500
       ),
+      displayLarge: TextStyle(
+          color: MyAppColors.textColor,
+          fontSize: 20.sp,
+          fontWeight: FontWeight.w500
+      ) ,
+      displayMedium: TextStyle(
+          color: MyAppColors.primaryColor,
+          fontSize: 17.sp,
+          fontWeight: FontWeight.w500//semibold
+      ) ,
+      headlineMedium: TextStyle(
+          color: MyAppColors.primaryColor,
+          fontSize: 18.sp,
+      ) ,
 
     ),
 

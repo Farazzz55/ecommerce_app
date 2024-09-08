@@ -38,7 +38,7 @@ class TopOfPage extends StatelessWidget{
           ),
         ),
         SizedBox(width: MediaQuery.of(context).size.width*0.05,),
-        ImageIcon(AssetImage('assets/images/shoppingCarIcon.png')),
+        ImageIcon(AssetImage('assets/images/shoppingCarIcon.png'),color: MyAppColors.primaryColor,),
       ],
     );
 

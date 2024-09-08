@@ -28,30 +28,37 @@ class ProductItemWidget extends StatelessWidget {
               topLeft: Radius.circular(25.r),
               topRight: Radius.circular(25.r),
             ),
-            child: Image.network(
-              productDataEntity.imageCover ?? '',
-              height: 160.h,
-              width: double.infinity,
-              fit: BoxFit.cover,
-              loadingBuilder: (context, child, progress) {
-                if (progress == null) {
-                  return child;
-                } else {
-                  return Center(
-                    child: CircularProgressIndicator(
-                      color: Theme.of(context).primaryColor,
-                    ),
+            child: Stack(
+              children:[ Image.network(
+                productDataEntity.imageCover ?? '',
+                height: 160.h,
+                width: double.infinity,
+                fit: BoxFit.cover,
+                loadingBuilder: (context, child, progress) {
+                  if (progress == null) {
+                    return child;
+                  } else {
+                    return Center(
+                      child: CircularProgressIndicator(
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    );
+                  }
+                },
+                errorBuilder: (context, error, stackTrace) {
+                  return Icon(
+                    Icons.error,
+                    color: Colors.grey,
+                    size: 50.h,
                   );
-                }
-              },
-              errorBuilder: (context, error, stackTrace) {
-                return Icon(
-                  Icons.error,
-                  color: Colors.grey,
-                  size: 50.h,
-                );
-              },
-            ),
+                },
+              ),
+                Positioned(
+                  right: 10,
+                    top: 10,
+                    child: Icon(Icons.favorite_outline_rounded,color: MyAppColors.primaryColor,
+                    size: 30.h,))
+            ]),
           ),
           SizedBox(height: 8.h),
           Padding(
@@ -59,7 +66,6 @@ class ProductItemWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Product title
                 Text(
                   productDataEntity.title ?? 'No title available',
                   maxLines: 1,
@@ -78,8 +84,6 @@ class ProductItemWidget extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 4.h),
-
-                // Product price
                 Text(
                   'EGP ${productDataEntity.price}',
                   style: GoogleFonts.poppins(
@@ -88,23 +92,26 @@ class ProductItemWidget extends StatelessWidget {
                 ),
                 SizedBox(height: 4.h),
 
-                // Rating section
                 Row(
-                  children: [
-                    Text(
-                      'Review ${productDataEntity.ratingsAverage}',
-                      style: GoogleFonts.poppins(
-                        textStyle: Theme.of(context).textTheme.bodySmall,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:[ Row(
+                    children: [
+                      Text(
+                        'Review ${productDataEntity.ratingsAverage}',
+                        style: GoogleFonts.poppins(
+                          textStyle: Theme.of(context).textTheme.bodySmall,
+                        ),
                       ),
-                    ),
-                    SizedBox(width: 4.w),
-                    Icon(
-                      Icons.star,
-                      color: Colors.yellow,
-                      size: 25.h,
-                    ),
-                  ],
-                ),
+                      SizedBox(width: 4.w),
+                      Icon(
+                        Icons.star,
+                        color: Colors.yellow,
+                        size: 25.h,
+                      ),
+                    ],
+                  ),
+                    Icon(Icons.add_circle,color: MyAppColors.primaryColor,size: 30.h,)
+                ]),
               ],
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/core/theme/myAppTheme.dart';
+import 'package:ecommerce_app/core/widget/shared_preferences_utils.dart';
 import 'package:ecommerce_app/features/auth_presentations_screens/login_screen/login_screen.dart';
 import 'package:ecommerce_app/features/main_screen/home_screen/cubit/home_tab_view_model.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +11,10 @@ import 'features/splash_screen/splash_screen.dart';
 import 'features/main_screen/main_screen.dart';
 import 'features/products_details_screen/product_details_screen.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
+  await SharedPreferencesUtils.init();
   runApp(MultiBlocProvider(
     providers: [
       BlocProvider<HomeTabViewModel>(create: (context)=>getIt<HomeTabViewModel>())
@@ -37,7 +40,7 @@ class MyApp extends StatelessWidget {
           ProductDetailsScreen.routeName:(context)=>ProductDetailsScreen(),
           MainScreen.routeName : (context)=> MainScreen()
         },
-        initialRoute: MainScreen.routeName,
+        initialRoute: SplashScreen.routeName,
         theme: MyAppTheme.appTheme,
       ),
     );

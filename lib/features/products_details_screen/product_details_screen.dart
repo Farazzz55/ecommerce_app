@@ -136,13 +136,26 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       style: GoogleFonts.poppins(
                         textStyle: Theme.of(context).textTheme.titleLarge,
                       ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                      maxLines: 4,
                     ),
                   ),
-                  Text('EGP ${product.price}',style: GoogleFonts.poppins(
-                      textStyle: Theme.of(context).textTheme.titleLarge
-                  ),),
+                  SizedBox(width: 10.w,),
+                  Container(
+                    width: 145.w,
+                    height: 50.h,
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.circular(25.r),
+                      border: Border.all(
+                        color: MyAppColors.primaryColor
+                      )
+                    ),
+                    child: Center(
+                      child: Text('EGP ${product.price}',style: GoogleFonts.poppins(
+                          textStyle: Theme.of(context).textTheme.titleLarge
+                      ),),
+                    ),
+                  ),
                 ],
               ),
               SizedBox(height: 15.h,),
@@ -219,15 +232,18 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                  children: [
                    Text('Total price' , style: GoogleFonts.poppins(
                      textStyle: Theme.of(context).textTheme.displayMedium?.copyWith(
-                       color: MyAppColors.primaryColor
+                       color: MyAppColors.primaryColor,
+                       fontWeight: FontWeight.w600
                      ),
                    ),),
                    SizedBox(height: 10.h,),
-                   Text('EGP ${product.price}' , style: GoogleFonts.poppins(
-                     textStyle: Theme.of(context).textTheme.displayMedium?.copyWith(
-                         color: MyAppColors.primaryColor
-                     ),
-                   ),),
+                   Container(
+                     child: Text('EGP ${product.price}' , style: GoogleFonts.poppins(
+                       textStyle: Theme.of(context).textTheme.displayMedium?.copyWith(
+                           color: MyAppColors.primaryColor
+                       ),
+                     ),),
+                   ),
                  ],
                ),
                SizedBox(width: 60.w,),

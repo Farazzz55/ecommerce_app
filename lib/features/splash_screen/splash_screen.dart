@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:ecommerce_app/core/widget/shared_preferences_utils.dart';
 import 'package:ecommerce_app/features/auth_presentations_screens/login_screen/login_screen.dart';
+import 'package:ecommerce_app/features/main_screen/main_screen.dart';
 import 'package:flutter/material.dart';
 
 
@@ -11,12 +13,18 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  var data=SharedPreferencesUtils.getData(key: 'token');
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 5), () {
-      Navigator.pushReplacementNamed(context, LoginScreen.routeName);
-    });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Timer(Duration(seconds: 5), () {
+        if (data == null) {
+          Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+        } else {
+          Navigator.pushReplacementNamed(context, MainScreen.routeName);
+        }
+      });});
   }
 
   @override

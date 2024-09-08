@@ -55,6 +55,11 @@ class MyAppTheme{
           color: MyAppColors.primaryColor,
           fontSize: 18.sp,
       ) ,
+      labelLarge:  TextStyle(
+          color: MyAppColors.primaryColor ,
+          fontSize: 24.sp,
+          fontWeight: FontWeight.w700
+      ),
 
     ),
 

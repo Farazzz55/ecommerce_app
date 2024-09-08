@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/core/colors/myAppColors.dart';
 import 'package:ecommerce_app/core/widget/dialog_utliz.dart';
+import 'package:ecommerce_app/core/widget/shared_preferences_utils.dart';
 import 'package:ecommerce_app/di.dart';
 import 'package:ecommerce_app/features/auth_presentations_screens/login_screen/cubit/login_state.dart';
 import 'package:ecommerce_app/features/auth_presentations_screens/login_screen/cubit/login_view_model.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/widget/CustomElevatedButton.dart';
 import '../../../core/widget/CustomTextFormField.dart';
 import '../../../core/widget/validator.dart';
@@ -36,8 +38,10 @@ class LoginScreen extends StatelessWidget{
           DialogUtliz.hideLoading(context);
           DialogUtliz.showMessege(context: context, content:'Login Successfully',
           ButtonOneName: 'OK',ButtonOne: (){
+            SharedPreferencesUtils.saveData(key: 'token',value:state.loginResponseEntity.token );
             Navigator.of(context).pushReplacementNamed(MainScreen.routeName);
               });
+
         }
       },
       bloc:viewModel ,

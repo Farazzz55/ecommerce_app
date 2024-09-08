@@ -9,8 +9,9 @@ class CustomTextFormField extends StatelessWidget{
    TextEditingController controller=TextEditingController();
    TextInputType keyboardType;
    bool obscureText;
+   Icon ? editIcon;
   CustomTextFormField({required this.hintText,required this.validator,required this.controller
-  , this.keyboardType=TextInputType.text,this.obscureText=false,this.label});
+  , this.keyboardType=TextInputType.text,this.obscureText=false,this.label , this.editIcon});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,7 +26,7 @@ class CustomTextFormField extends StatelessWidget{
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15.r),
             borderSide: BorderSide(
-              color: MyAppColors.whiteColor,
+              color: MyAppColors.primaryColor,
               width: 2.w
             )
           ),
@@ -33,7 +34,7 @@ class CustomTextFormField extends StatelessWidget{
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15.r),
               borderSide: BorderSide(
-                  color: MyAppColors.whiteColor,
+                  color: MyAppColors.primaryColor,
                   width: 2.w
               )
           ),
@@ -62,7 +63,8 @@ class CustomTextFormField extends StatelessWidget{
             hintStyle: TextStyle(
           fontSize: 18.sp,
           color: MyAppColors.greyColor,
-        )
+        ),
+          suffixIcon: editIcon
 
         ),
         validator: validator,

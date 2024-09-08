@@ -35,8 +35,12 @@ class MyAppTheme{
         color: MyAppColors.primaryColor,
         fontSize: 14.sp,
           fontWeight: FontWeight.w500
-
-      )
+      ),
+      displaySmall: TextStyle(
+          color: MyAppColors.primaryColor,
+          fontSize: 12.sp,
+          fontWeight: FontWeight.w500
+      ),
 
     ),
 

@@ -23,3 +23,4 @@ class HomeTabErrorBrandsState extends HomeTabState{
   HomeTabErrorBrandsState({required this.failures});
 }
 
+

@@ -1,6 +1,4 @@
-import 'package:dots_indicator/dots_indicator.dart';
 import 'package:ecommerce_app/core/colors/myAppColors.dart';
-import 'package:ecommerce_app/di.dart';
 import 'package:ecommerce_app/features/main_screen/home_screen/cubit/home_tab_state.dart';
 import 'package:ecommerce_app/features/main_screen/home_screen/cubit/home_tab_view_model.dart';
 import 'package:ecommerce_app/features/main_screen/home_screen/widget/AdsWidget.dart';

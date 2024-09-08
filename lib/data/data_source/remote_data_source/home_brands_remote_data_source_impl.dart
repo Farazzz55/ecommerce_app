@@ -16,7 +16,7 @@ class HomeBrandsRemoteDataSourceImpl extends HomeBrandsRemoteDataSource{
     try {
    var response = await apiManger.getData(EndPoint.brandsUrl);
    var brandsResponse= BrandsResponseDto.fromJson(response.data);
-   if(response.statusCode==200){
+   if(response.statusCode!>=200&&response.statusCode!<300){
      return Right(brandsResponse);
    }else{
      return Left(ServerError(errorMessage: brandsResponse.message!));

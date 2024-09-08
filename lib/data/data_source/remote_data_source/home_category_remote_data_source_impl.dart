@@ -16,7 +16,7 @@ class HomeCategoryRemoteDataSourceImpl extends HomeCategoryRemoteDataSource{
     try{
        var response= await apiManger.getData(EndPoint.categoryUrl);
        var categoryResponse= CategoryResponseDto.fromJson(response.data);
-       if(response.statusCode==200){
+       if(response.statusCode!>=200&&response.statusCode!<300){
          return Right(categoryResponse);
        }else{
          return Left(ServerError(errorMessage:categoryResponse.message! ));

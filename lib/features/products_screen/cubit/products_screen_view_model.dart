@@ -20,5 +20,6 @@ class ProductsScreenViewModel extends Cubit<ProductScreenState>{
 
     });
   }
+  static ProductsScreenViewModel get(context) =>BlocProvider.of(context);
 
 }

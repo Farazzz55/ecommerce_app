@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/core/colors/myAppColors.dart';
 import 'package:ecommerce_app/core/widget/CustomTextFormField.dart';
+import 'package:ecommerce_app/core/widget/shared_preferences_utils.dart';
 import 'package:ecommerce_app/features/auth_presentations_screens/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,6 +30,7 @@ class UserScreen extends StatelessWidget{
                     textStyle: Theme.of(context).textTheme.labelLarge
                   ),),
                   IconButton(onPressed: (){
+                    logout(context);
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (context) => LoginScreen()),
@@ -72,6 +74,9 @@ class UserScreen extends StatelessWidget{
       ),
 
     );
+  }
+  void logout(BuildContext context) async {
+    await SharedPreferencesUtils.removeData(key: 'token');
   }
 
 }

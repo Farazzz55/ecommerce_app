@@ -12,6 +12,10 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
 import 'package:ecommerce_app/data/api_manger.dart' as _i86;
+import 'package:ecommerce_app/data/data_source/remote_data_source/add_to_cart_remote_data_source.dart'
+    as _i249;
+import 'package:ecommerce_app/data/data_source/remote_data_source/add_to_cart_remote_data_source_impl.dart'
+    as _i129;
 import 'package:ecommerce_app/data/data_source/remote_data_source/auth_remote_data_source.dart'
     as _i983;
 import 'package:ecommerce_app/data/data_source/remote_data_source/auth_remote_data_source_impl.dart'
@@ -28,14 +32,17 @@ import 'package:ecommerce_app/data/data_source/remote_data_source/products_remot
     as _i481;
 import 'package:ecommerce_app/data/data_source/remote_data_source/products_reomte_data_source_impl.dart'
     as _i809;
+import 'package:ecommerce_app/data/repository/add_to_cart_repo_impl.dart' as _i136;
 import 'package:ecommerce_app/data/repository/auth_repository_impl.dart' as _i448;
 import 'package:ecommerce_app/data/repository/home_brands_repo_impl.dart' as _i825;
 import 'package:ecommerce_app/data/repository/HomeCategory_repo_impl.dart' as _i853;
 import 'package:ecommerce_app/data/repository/product_repo_impl.dart' as _i99;
+import 'package:ecommerce_app/domain/repository/add_to_cart_repo.dart' as _i941;
 import 'package:ecommerce_app/domain/repository/auth_repository.dart' as _i914;
 import 'package:ecommerce_app/domain/repository/HomeBrands_repo.dart' as _i467;
 import 'package:ecommerce_app/domain/repository/HomeCategory_repo.dart' as _i784;
 import 'package:ecommerce_app/domain/repository/products_repo.dart' as _i444;
+import 'package:ecommerce_app/domain/use_cases/add_to_cart_use_case.dart' as _i428;
 import 'package:ecommerce_app/domain/use_cases/home_brands_use_case.dart' as _i458;
 import 'package:ecommerce_app/domain/use_cases/home_category_use_case.dart' as _i746;
 import 'package:ecommerce_app/domain/use_cases/login_use_case.dart' as _i644;
@@ -47,6 +54,8 @@ import 'features/auth_presentations_screens/register_screen/cubit/register_view_
     as _i892;
 import 'features/main_screen/home_screen/cubit/home_tab_view_model.dart'
     as _i278;
+import 'features/products_screen/add_to_cart/cubit/add_to_cart_view_model.dart'
+    as _i707;
 import 'features/products_screen/cubit/products_screen_view_model.dart'
     as _i576;
 
@@ -69,10 +78,16 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i586.HomeCategoryRemoteDataSource>(() =>
         _i957.HomeCategoryRemoteDataSourceImpl(
             apiManger: gh<_i86.ApiManger>()));
+    gh.factory<_i249.AddToCartRemoteDataSource>(() =>
+        _i129.AddToCartRemoteDataSourceImpl(apiManger: gh<_i86.ApiManger>()));
     gh.factory<_i983.AuthRemoteDataSource>(
         () => _i229.AuthRemoteDataSourceImpl(apiManger: gh<_i86.ApiManger>()));
+    gh.factory<_i941.AddToCartRepo>(() => _i136.AddToCartRepoImpl(
+        remoteDataSource: gh<_i249.AddToCartRemoteDataSource>()));
     gh.lazySingleton<_i467.HomeBrandsRepo>(() => _i825.HomeBrandsRepoImpl(
         brandsRemoteDataSource: gh<_i422.HomeBrandsRemoteDataSource>()));
+    gh.factory<_i428.AddToCartUseCase>(
+        () => _i428.AddToCartUseCase(addToCartRepo: gh<_i941.AddToCartRepo>()));
     gh.factory<_i444.ProductsRepo>(() => _i99.ProductRepoImpl(
         productRemoteDataSource: gh<_i481.ProductRemoteDataSource>()));
     gh.factory<_i914.AuthRepository>(() => _i448.AuthRepositoryImpl(
@@ -85,6 +100,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i592.LoginViewModel(loginUseCase: gh<_i644.LoginUseCase>()));
     gh.lazySingleton<_i784.HomeCategoryRepo>(() => _i853.HomeCategoryRepoImpl(
         categoryRemoteDataSource: gh<_i586.HomeCategoryRemoteDataSource>()));
+    gh.factory<_i707.AddToCartViewModel>(() =>
+        _i707.AddToCartViewModel(cartUseCase: gh<_i428.AddToCartUseCase>()));
     gh.factory<_i631.ProductUseCase>(
         () => _i631.ProductUseCase(productsRepo: gh<_i444.ProductsRepo>()));
     gh.factory<_i458.HomeBrandsUseCase>(

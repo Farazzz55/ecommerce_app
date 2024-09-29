@@ -1,14 +1,20 @@
 import 'package:ecommerce_app/core/colors/myAppColors.dart';
 import 'package:ecommerce_app/domain/entites/product_response_entity.dart';
+import 'package:ecommerce_app/features/products_screen/add_to_cart/cubit/add_to_cart_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ProductItemWidget extends StatelessWidget {
+class ProductItemWidget extends StatefulWidget {
   final ProductDataEntity productDataEntity;
 
   ProductItemWidget({required this.productDataEntity});
 
+  @override
+  State<ProductItemWidget> createState() => _ProductItemWidgetState();
+}
+
+class _ProductItemWidgetState extends State<ProductItemWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,7 +36,7 @@ class ProductItemWidget extends StatelessWidget {
             ),
             child: Stack(
               children:[ Image.network(
-                productDataEntity.imageCover ?? '',
+                widget.productDataEntity.imageCover ?? '',
                 height: 160.h,
                 width: double.infinity,
                 fit: BoxFit.cover,
@@ -57,7 +63,7 @@ class ProductItemWidget extends StatelessWidget {
                   right: 10,
                     top: 10,
                     child: Icon(Icons.favorite_outline_rounded,color: MyAppColors.primaryColor,
-                    size: 30.h,))
+                    size: 35.h,))
             ]),
           ),
           SizedBox(height: 8.h),
@@ -67,7 +73,7 @@ class ProductItemWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  productDataEntity.title ?? 'No title available',
+                  widget.productDataEntity.title ?? 'No title available',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.poppins(
@@ -76,7 +82,7 @@ class ProductItemWidget extends StatelessWidget {
                 ),
                 SizedBox(height: 4.h),
                 Text(
-                  productDataEntity.description ?? 'No description available',
+                  widget.productDataEntity.description ?? 'No description available',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.poppins(
@@ -85,7 +91,7 @@ class ProductItemWidget extends StatelessWidget {
                 ),
                 SizedBox(height: 4.h),
                 Text(
-                  'EGP ${productDataEntity.price}',
+                  'EGP ${widget.productDataEntity.price}',
                   style: GoogleFonts.poppins(
                     textStyle: Theme.of(context).textTheme.bodyMedium,
                   ),
@@ -97,7 +103,7 @@ class ProductItemWidget extends StatelessWidget {
                   children:[ Row(
                     children: [
                       Text(
-                        'Review ${productDataEntity.ratingsAverage}',
+                        'Review ${widget.productDataEntity.ratingsAverage}',
                         style: GoogleFonts.poppins(
                           textStyle: Theme.of(context).textTheme.bodySmall,
                         ),
@@ -110,7 +116,13 @@ class ProductItemWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                    Icon(Icons.add_circle,color: MyAppColors.primaryColor,size: 30.h,)
+                    IconButton(onPressed: (){
+                      AddToCartViewModel.get(context).addToCart(widget.productDataEntity.id??'');
+                       setState(() {
+
+                       });
+                    }, icon: Icon(Icons.add_circle,color: MyAppColors.primaryColor,size: 35.h,)
+                    )
                 ]),
               ],
             ),

@@ -14,12 +14,13 @@ class ApiManger{
        ));
   }
   Future<Response>postData(String endPoint,{ Map<String, dynamic>? queryPrameters
-  ,Map<String, dynamic>? body}){
+  ,Map<String, dynamic>? body,Map<String, dynamic>? headers}){
     return dio.post(
         AppConstant.baseUrl+endPoint,data:body,
         queryParameters: queryPrameters ,
     options: Options(
-      validateStatus: ((status)=>true)
+      validateStatus: ((status)=>true),
+      headers: headers,
     ));
   }
 }

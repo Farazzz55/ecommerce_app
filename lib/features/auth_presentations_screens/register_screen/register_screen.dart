@@ -1,12 +1,9 @@
-import 'dart:typed_data';
-
 import 'package:ecommerce_app/core/colors/myAppColors.dart';
 import 'package:ecommerce_app/core/widget/CustomElevatedButton.dart';
 import 'package:ecommerce_app/core/widget/CustomTextFormField.dart';
 import 'package:ecommerce_app/core/widget/dialog_utliz.dart';
 import 'package:ecommerce_app/core/widget/validator.dart';
 import 'package:ecommerce_app/di.dart';
-import 'package:ecommerce_app/domain/use_cases/register_use_case.dart';
 import 'package:ecommerce_app/features/auth_presentations_screens/login_screen/login_screen.dart';
 import 'package:ecommerce_app/features/auth_presentations_screens/register_screen/cubit/register_state.dart';
 import 'package:ecommerce_app/features/auth_presentations_screens/register_screen/cubit/register_view_model.dart';
@@ -14,11 +11,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:injectable/injectable.dart';
 
 class RegisterScreen extends StatelessWidget{
   static String routeName='registerScreen';
   RegisterViewModel viewModel = getIt<RegisterViewModel>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +27,7 @@ class RegisterScreen extends StatelessWidget{
               DialogUtliz.showLoading(context: context, messege: 'Loading');
         }else if( state is RegisterErrorState){
           DialogUtliz.hideLoading(context);
+          print("Registration Error: ${state.failures.errorMessage}");
           DialogUtliz.showMessege(context: context, content: state.failures.errorMessage,
           ButtonOneName: 'Try again' , ButtonOne: (){
             Navigator.pop(context);
@@ -48,7 +47,7 @@ class RegisterScreen extends StatelessWidget{
           child: Padding(
             padding:  EdgeInsets.all(8.0.w),
             child: Form(
-              autovalidateMode: AutovalidateMode.onUserInteraction,
+              key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -106,13 +105,13 @@ class RegisterScreen extends StatelessWidget{
                   CustomElevatedButton(
                     label: 'Sign Up',
                     onTap: () {
-                      final form = Form.of(context);
-                      if (form != null && form.validate()) {
+                      if (_formKey.currentState != null &&
+                          _formKey.currentState!.validate()) {
                         viewModel.register();
-                      } else {
                       }
                     },
-                    isStadiumBorder: false,)
+                    isStadiumBorder: false,
+                  ),
 
                 ],
               ),

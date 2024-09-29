@@ -13,13 +13,13 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  var data=SharedPreferencesUtils.getData(key: 'token');
+  var token =  SharedPreferencesUtils.getData(key: 'token');
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Timer(Duration(seconds: 5), () {
-        if (data == null) {
+        if (token == null) {
           Navigator.pushReplacementNamed(context, LoginScreen.routeName);
         } else {
           Navigator.pushReplacementNamed(context, MainScreen.routeName);
@@ -40,4 +40,5 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
     );
   }
+
 }

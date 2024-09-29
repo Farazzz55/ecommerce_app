@@ -1,5 +1,8 @@
 import 'package:ecommerce_app/core/colors/myAppColors.dart';
+import 'package:ecommerce_app/features/products_screen/add_to_cart/cubit/add_to_cart_view_model.dart';
+import 'package:ecommerce_app/features/products_screen/cubit/products_screen_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TopOfPage extends StatelessWidget{
@@ -38,8 +41,22 @@ class TopOfPage extends StatelessWidget{
           ),
         ),
         SizedBox(width: MediaQuery.of(context).size.width*0.05,),
-        ImageIcon(AssetImage('assets/images/shoppingCarIcon.png'),color: MyAppColors.primaryColor,),
-      ],
+        BlocBuilder<AddToCartViewModel, ProductScreenState>(
+          builder: (context, state) {
+            final cartItems = AddToCartViewModel.get(context).numOfCartItem;
+            return Badge(
+              backgroundColor: MyAppColors.primaryColor,
+              textStyle: TextStyle(
+                fontSize: 15.sp
+              ),
+              label: Text('$cartItems'),
+              child: ImageIcon(
+                AssetImage('assets/images/shoppingCarIcon.png'),
+                color: MyAppColors.primaryColor,
+              ),
+            );
+          },
+        ),      ],
     );
 
   }

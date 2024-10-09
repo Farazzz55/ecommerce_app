@@ -10,6 +10,7 @@ import 'package:ecommerce_app/features/products_screen/widget/productItemWidget.
 import 'package:ecommerce_app/features/products_details_screen/product_details_screen.dart';
 
 class ProductsScreen extends StatelessWidget {
+  static String routeName='ProductsScreen';
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

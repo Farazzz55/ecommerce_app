@@ -1,9 +1,12 @@
 import 'package:ecommerce_app/core/theme/myAppTheme.dart';
 import 'package:ecommerce_app/core/widget/shared_preferences_utils.dart';
 import 'package:ecommerce_app/features/auth_presentations_screens/login_screen/login_screen.dart';
+import 'package:ecommerce_app/features/cart_screen/cart_screen.dart';
+import 'package:ecommerce_app/features/cart_screen/cubit/cart_screen_view_model.dart';
 import 'package:ecommerce_app/features/main_screen/home_screen/cubit/home_tab_view_model.dart';
 import 'package:ecommerce_app/features/products_screen/add_to_cart/cubit/add_to_cart_view_model.dart';
 import 'package:ecommerce_app/features/products_screen/cubit/products_screen_view_model.dart';
+import 'package:ecommerce_app/features/products_screen/products_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,7 +23,9 @@ void main() async{
   runApp(MultiBlocProvider(
     providers: [
       BlocProvider<HomeTabViewModel>(create: (context)=>getIt<HomeTabViewModel>()),
-      BlocProvider<AddToCartViewModel>(create: (context)=>getIt<AddToCartViewModel>())
+      BlocProvider<AddToCartViewModel>(create: (context)=>getIt<AddToCartViewModel>()),
+      BlocProvider<CartScreenViewModel>(create: (context)=>getIt<CartScreenViewModel>()),
+
 
     ],
       child: const MyApp()));
@@ -42,7 +47,9 @@ class MyApp extends StatelessWidget {
           RegisterScreen.routeName :(context)=>RegisterScreen(),
           LoginScreen.routeName :(context)=>LoginScreen(),
           ProductDetailsScreen.routeName:(context)=>ProductDetailsScreen(),
-          MainScreen.routeName : (context)=> MainScreen()
+          MainScreen.routeName : (context)=> MainScreen(),
+          ProductsScreen.routeName:(context)=>ProductsScreen(),
+          CartScreen.routeName:(context)=>CartScreen()
         },
         initialRoute: SplashScreen.routeName,
         theme: MyAppTheme.appTheme,

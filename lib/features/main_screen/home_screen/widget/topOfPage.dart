@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/core/colors/myAppColors.dart';
+import 'package:ecommerce_app/features/cart_screen/cart_screen.dart';
 import 'package:ecommerce_app/features/products_screen/add_to_cart/cubit/add_to_cart_view_model.dart';
 import 'package:ecommerce_app/features/products_screen/cubit/products_screen_state.dart';
 import 'package:flutter/material.dart';
@@ -50,9 +51,15 @@ class TopOfPage extends StatelessWidget{
                 fontSize: 15.sp
               ),
               label: Text('$cartItems'),
-              child: ImageIcon(
-                AssetImage('assets/images/shoppingCarIcon.png'),
-                color: MyAppColors.primaryColor,
+              child: InkWell(
+                onTap: (){
+                  Navigator.of(context).pushNamed(CartScreen.routeName);
+
+                },
+                child: ImageIcon(
+                  AssetImage('assets/images/shoppingCarIcon.png'),
+                  color: MyAppColors.primaryColor,
+                ),
               ),
             );
           },

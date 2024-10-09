@@ -5,4 +5,5 @@ class EndPoint{
   static String brandsUrl='/api/v1/brands';
   static String productUrl='/api/v1/products';
   static String addCartUrl='/api/v1/cart';
+  static String getCart='/api/v1/cart';
 }

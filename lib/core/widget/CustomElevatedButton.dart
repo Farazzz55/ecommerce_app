@@ -45,7 +45,7 @@ class CustomElevatedButton extends StatelessWidget {
           children: [
             if (prefixIcon != null) prefixIcon!,
             SizedBox(width: 10.w),
-            Text(label),
+            Text(label,style: textStyle,),
             if (suffixIcon != null) ...[
               SizedBox(width: 10.w),
               suffixIcon!,

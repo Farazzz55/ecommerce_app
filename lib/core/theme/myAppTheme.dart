@@ -60,6 +60,11 @@ class MyAppTheme{
           fontSize: 24.sp,
           fontWeight: FontWeight.w700
       ),
+      headlineLarge: TextStyle(
+        color: MyAppColors.primaryColor,
+        fontSize: 18.sp,
+        fontWeight: FontWeight.bold
+      )
 
     ),
 

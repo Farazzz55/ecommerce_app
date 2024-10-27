@@ -8,5 +8,7 @@ class EndPoint{
   static String getCart='/api/v1/cart';
   static String updateCart='/api/v1/cart/';
   static String favCart='/api/v1/wishlist';
+  static String getFav='/api/v1/wishlist';
+
 
 }

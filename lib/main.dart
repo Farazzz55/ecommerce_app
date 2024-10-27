@@ -4,6 +4,8 @@ import 'package:ecommerce_app/features/auth_presentations_screens/login_screen/l
 import 'package:ecommerce_app/features/cart_screen/cart_screen.dart';
 import 'package:ecommerce_app/features/cart_screen/cubit/cart_screen_view_model.dart';
 import 'package:ecommerce_app/features/main_screen/favourite_screen/cubit/add_to_fav_view_model.dart';
+import 'package:ecommerce_app/features/main_screen/favourite_screen/cubit/get_fav_view_model.dart';
+import 'package:ecommerce_app/features/main_screen/favourite_screen/cubit/remove_fav_view_model.dart';
 import 'package:ecommerce_app/features/main_screen/home_screen/cubit/home_tab_view_model.dart';
 import 'package:ecommerce_app/features/products_screen/add_to_cart/cubit/add_to_cart_view_model.dart';
 import 'package:ecommerce_app/features/products_screen/cubit/products_screen_view_model.dart';
@@ -27,6 +29,8 @@ void main() async{
       BlocProvider<AddToCartViewModel>(create: (context)=>getIt<AddToCartViewModel>()),
       BlocProvider<CartScreenViewModel>(create: (context)=>getIt<CartScreenViewModel>()),
       BlocProvider<AddToFavViewModel>(create: (context)=>getIt<AddToFavViewModel>()),
+      BlocProvider<GetFavViewModel>(create: (context)=>getIt<GetFavViewModel>()),
+      BlocProvider<RemoveFavViewModel>(create: (context)=>getIt<RemoveFavViewModel>()),
 
 
 

@@ -9,6 +9,7 @@ class AddToFavDto extends AddToFavEntity {
 
   AddToFavDto.fromJson(dynamic json) {
     status = json['status'];
+    statusMsg = json['statusMsg'];
     message = json['message'];
     data = json['data'] != null ? json['data'].cast<String>() : [];
   }

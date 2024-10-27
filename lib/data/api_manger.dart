@@ -26,4 +26,27 @@ class ApiManger{
       headers: headers,
     ));
   }
+  Future<Response>deleteData(String endPoint,{ Map<String, dynamic>? queryPrameters
+    ,Map<String, dynamic>? body,Map<String, dynamic>? headers}){
+    print("Sending DELETE request to: ${AppConstant.baseUrl + endPoint}");
+    return dio.delete(
+        AppConstant.baseUrl+endPoint,data:body,
+        queryParameters: queryPrameters ,
+        options: Options(
+          validateStatus: ((status)=>true),
+          headers: headers,
+        ));
+  }
+  Future<Response>updateData(String endPoint,{ Map<String, dynamic>? queryPrameters
+    ,Map<String, dynamic>? body,Map<String, dynamic>? headers}){
+    print("Sending updated request to: ${AppConstant.baseUrl + endPoint}");
+    return dio.put(
+        AppConstant.baseUrl+endPoint,
+        data:body,
+        queryParameters: queryPrameters ,
+        options: Options(
+          validateStatus: ((status)=>true),
+          headers: headers,
+        ));
+  }
 }

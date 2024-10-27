@@ -61,6 +61,7 @@ class ProductsScreen extends StatelessWidget {
                             },
                             child: ProductItemWidget(
                               productDataEntity: viewModel.productList[index],
+
                             ),
                           );
                         },

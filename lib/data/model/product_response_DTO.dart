@@ -7,7 +7,8 @@ class ProductResponseDto extends ProductResponseEntity {
       super.metadata,
       super.data,
       this.message,
-      this.statusMsg});
+      this.statusMsg,
+  });
   String ? message;
   String ? statusMsg;
   ProductResponseDto.fromJson(dynamic json) {

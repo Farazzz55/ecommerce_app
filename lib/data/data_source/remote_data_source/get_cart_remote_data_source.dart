@@ -4,4 +4,7 @@ import 'package:ecommerce_app/domain/failures.dart';
 
 abstract class GetCartRemoteDataSource {
   Future<Either<Failures,GetCartEntity>> getCart();
+  Future<Either<Failures,GetCartEntity>> deleteItemInCart(String productId);
+  Future<Either<Failures,GetCartEntity>> updateItemInCart(String productId,int count);
+
 }

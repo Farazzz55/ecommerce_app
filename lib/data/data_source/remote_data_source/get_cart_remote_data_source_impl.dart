@@ -33,4 +33,48 @@ class GetCartRemoteDataSourceImpl extends GetCartRemoteDataSource{
 
     }
   }
+
+  @override
+  Future<Either<Failures, GetCartResponseDto>> deleteItemInCart(String productId)async {
+    try{
+      var token=SharedPreferencesUtils.getData(key: 'token');
+      var response= await apiManger.deleteData('${EndPoint.addCartUrl}/$productId',headers:
+      {
+        'token':token
+      });
+      var responseData=GetCartResponseDto.fromJson(response.data);
+      if(response.statusCode!>=200&&response.statusCode!<300){
+        return Right(responseData);
+      }else {
+        return Left(ServerError(errorMessage:responseData.message! ));
+      }
+
+    } catch(e){
+      return Left(Failures(errorMessage: e.toString()));
+
+    }
+  }
+
+  @override
+  Future<Either<Failures, GetCartResponseDto>> updateItemInCart(String productId, int count) async{
+    try{
+      var token=SharedPreferencesUtils.getData(key: 'token');
+      var response= await apiManger.updateData('${EndPoint.updateCart}/$productId',headers:
+      {
+        'token':token
+      },body: {
+        'count':count
+      });
+      var responseData=GetCartResponseDto.fromJson(response.data);
+      if(response.statusCode!>=200&&response.statusCode!<300){
+        return Right(responseData);
+      }else {
+        return Left(ServerError(errorMessage:responseData.message! ));
+      }
+
+    } catch(e){
+      return Left(Failures(errorMessage: e.toString()));
+
+    }
+  }
 }

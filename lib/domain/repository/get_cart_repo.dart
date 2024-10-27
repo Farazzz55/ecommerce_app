@@ -5,5 +5,7 @@ import 'package:flutter/material.dart';
 
 abstract class GetCartRepo {
  Future <Either<Failures,GetCartEntity>> getCart();
+ Future <Either<Failures,GetCartEntity>> deleteItemInCart(String productId);
+ Future<Either<Failures,GetCartEntity>> updateItemInCart(String productId,int count);
 
 }

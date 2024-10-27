@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/core/colors/myAppColors.dart';
 import 'package:ecommerce_app/domain/entites/get_cart_entity.dart';
+import 'package:ecommerce_app/features/cart_screen/cubit/cart_screen_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -87,7 +88,7 @@ class CartItemWidget extends StatelessWidget {
                         bottom: 50.h
                     ),
                     child: IconButton(onPressed: (){
-
+                          CartScreenViewModel.get(context).deleteItemInCart(dataEntity.product?.id??'');
                     }, icon: Icon(Icons.delete_outline , color: MyAppColors.primaryColor,size: 35.w
                       ,)),
                   ),
@@ -106,7 +107,11 @@ class CartItemWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              int count= dataEntity.count!.toInt();
+                              count--;
+                               CartScreenViewModel.get(context).updateItemInCart(dataEntity.product?.id??'',count );
+                            },
                             icon: Icon(
                               Icons.remove_circle_outline,
                               color: MyAppColors.whiteColor,
@@ -121,7 +126,11 @@ class CartItemWidget extends StatelessWidget {
                             ),
                           ),
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              int count= dataEntity.count!.toInt();
+                              count++;
+                              CartScreenViewModel.get(context).updateItemInCart(dataEntity.product?.id??'',count );
+                            },
                             icon: Icon(
                               Icons.add_circle_outline_sharp,
                               color: MyAppColors.whiteColor,

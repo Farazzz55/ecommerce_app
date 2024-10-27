@@ -2,14 +2,17 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:ecommerce_app/core/colors/myAppColors.dart';
 import 'package:ecommerce_app/domain/entites/product_response_entity.dart';
+import 'package:ecommerce_app/features/cart_screen/cart_screen.dart';
+import 'package:ecommerce_app/features/products_screen/add_to_cart/cubit/add_to_cart_view_model.dart';
+import 'package:ecommerce_app/features/products_screen/cubit/products_screen_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readmore/readmore.dart';
 class ProductDetailsScreen extends StatefulWidget {
   static String routeName = 'details_screen';
   int currentIndex = 0;
-
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
 }
@@ -38,10 +41,25 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             color: MyAppColors.primaryColor,
           ),
           SizedBox(width: 20.w),
-          ImageIcon(
-            AssetImage('assets/images/shoppingCarIcon.png'),
-            color: MyAppColors.primaryColor,
-            size: 35.h,
+          BlocBuilder<AddToCartViewModel, ProductScreenState>(
+              builder: (context,state){
+                final cartItems = AddToCartViewModel.get(context).numOfCartItem;
+                return Badge(
+                  backgroundColor: MyAppColors.primaryColor,
+                  textStyle: TextStyle(
+                      fontSize: 15.sp
+                  ),
+                  label: Text('$cartItems'),
+                  child: InkWell(
+                    onTap: (){
+                      Navigator.of(context).pushNamed(CartScreen.routeName);
+                    },
+                    child: ImageIcon(
+                      AssetImage('assets/images/shoppingCarIcon.png'),
+                      color: MyAppColors.primaryColor,
+                    ),
+                  ),
+                );}
           ),
           SizedBox(width: 10.w),
         ],
@@ -181,25 +199,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   Text('${product.ratingsAverage} (${product.ratingsQuantity})',style: GoogleFonts.poppins(
                       textStyle: Theme.of(context).textTheme.displayMedium
                   )),
-                  SizedBox(width: 60.w,),
-                  Container(
-                    width: 120.w,
-                    height: 50.h,
-                    decoration: BoxDecoration(
-                      color: MyAppColors.primaryColor,
-                      borderRadius: BorderRadius.circular(20.r)
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(onPressed: (){}, icon:Icon (Icons.remove_circle_outline,color: Colors.white,)),
-                        Text('1',style: GoogleFonts.poppins(
-                            textStyle: Theme.of(context).textTheme.titleMedium
-                        )),
-                        IconButton(onPressed: (){}, icon:Icon (Icons.add_circle_outline,color: Colors.white,)),
-                      ],
-                    ),
-                  )
                 ],
               ),
               SizedBox(height: 15.h,),
@@ -255,7 +254,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                    style: ElevatedButton.styleFrom(
                      backgroundColor: MyAppColors.primaryColor,
                    ),
-                     onPressed: (){}, child: Row(
+                     onPressed: (){
+                       AddToCartViewModel.get(context).addToCart(product.id??'');
+                       setState(() {
+
+                       });
+                     }, child: Row(
                        children: [
                          ImageIcon(AssetImage('assets/images/cart.png'),color: Colors.white,
                          size: 25.w,),

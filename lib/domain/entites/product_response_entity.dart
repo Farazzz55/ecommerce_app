@@ -28,8 +28,10 @@ class ProductDataEntity {
       this.brand, 
       this.ratingsAverage, 
       this.createdAt, 
-      this.updatedAt, 
-      });
+      this.updatedAt,
+    this.isFavorite=false ,
+
+  });
 
   num? sold;
   List<String>? images;
@@ -47,6 +49,7 @@ class ProductDataEntity {
   num? ratingsAverage;
   String? createdAt;
   String? updatedAt;
+  bool isFavorite;
 
 
 }

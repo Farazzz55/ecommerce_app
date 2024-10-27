@@ -9,6 +9,7 @@ import 'package:injectable/injectable.dart';
 class ProductsScreenViewModel extends Cubit<ProductScreenState>{
   ProductUseCase productUseCase;
   List<ProductDataEntity>productList=[];
+  List<ProductDataEntity> favoriteList = []; 
   ProductsScreenViewModel({required this.productUseCase}):super(ProductScreenInitState());
    getPrdouctsData()async{
     var either= await productUseCase.invoke();

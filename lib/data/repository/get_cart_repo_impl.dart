@@ -16,4 +16,17 @@ class GetCartRepoImpl extends GetCartRepo {
     var either = await remoteDataSource.getCart();
     return either.fold((l) => Left(l), (r) => Right(r));
   }
+
+  @override
+  Future<Either<Failures, GetCartEntity>> deleteItemInCart(String productId) async{
+   var either=await remoteDataSource.deleteItemInCart(productId);
+   return either.fold((l)=> Left(l), (r)=>Right(r));
+  }
+
+  @override
+  Future<Either<Failures, GetCartEntity>> updateItemInCart(String productId, int count) async{
+   var either = await remoteDataSource.updateItemInCart(productId, count);
+   return either.fold((l)=> Left(l), (r)=>Right(r));
+
+  }
 }

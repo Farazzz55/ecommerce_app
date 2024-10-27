@@ -3,7 +3,8 @@ import 'package:ecommerce_app/features/cart_screen/cart_item_widget.dart';
 import 'package:ecommerce_app/features/cart_screen/cubit/cart_screen_state.dart';
 import 'package:ecommerce_app/features/cart_screen/cubit/cart_screen_view_model.dart';
 import 'package:ecommerce_app/features/cart_screen/total_price_widget/TotalPriceAndCheckoutBotton.dart';
-import 'package:ecommerce_app/features/products_screen/products_screen.dart';
+import 'package:ecommerce_app/features/products_screen/add_to_cart/cubit/add_to_cart_view_model.dart';
+import 'package:ecommerce_app/features/products_screen/cubit/products_screen_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -35,10 +36,20 @@ class CartScreen extends StatelessWidget {
                 color: MyAppColors.primaryColor,
               ),
               SizedBox(width: 20.w),
-              ImageIcon(
-                AssetImage('assets/images/shoppingCarIcon.png'),
-                color: MyAppColors.primaryColor,
-                size: 35.h,
+              BlocBuilder<AddToCartViewModel, ProductScreenState>(
+                builder: (context,state){
+                  final cartItems = AddToCartViewModel.get(context).numOfCartItem;
+                  return Badge(
+                  backgroundColor: MyAppColors.primaryColor,
+                  textStyle: TextStyle(
+                      fontSize: 15.sp
+                  ),
+                  label: Text('$cartItems'),
+                  child: ImageIcon(
+                    AssetImage('assets/images/shoppingCarIcon.png'),
+                    color: MyAppColors.primaryColor,
+                  ),
+                );}
               ),
               SizedBox(width: 10.w),
             ],

@@ -12,3 +12,21 @@ abstract class CartScreenState{}
   Failures failures;
   CartScreenErrorState({required this.failures});
 }
+class CartScreenLoadingDeleteState extends CartScreenState{}
+class CartScreenSuccessDeleteState extends CartScreenState{
+ GetCartEntity getCartEntity;
+ CartScreenSuccessDeleteState({required this.getCartEntity});
+}
+class CartScreenErrorDeleteState extends CartScreenState{
+ Failures failures;
+ CartScreenErrorDeleteState({required this.failures});
+}
+class CartScreenSuccessUpdateState extends CartScreenState{
+ GetCartEntity getCartEntity;
+ CartScreenSuccessUpdateState({required this.getCartEntity});
+}
+class CartScreenErrorUpdateState extends CartScreenState{
+ Failures failures;
+ CartScreenErrorUpdateState({required this.failures});
+}
+class CartScreenLoadingUpdateState extends CartScreenState{}

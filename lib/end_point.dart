@@ -6,4 +6,7 @@ class EndPoint{
   static String productUrl='/api/v1/products';
   static String addCartUrl='/api/v1/cart';
   static String getCart='/api/v1/cart';
+  static String updateCart='/api/v1/cart/';
+  static String favCart='/api/v1/wishlist';
+
 }

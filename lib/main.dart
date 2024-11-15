@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:ecommerce_app/core/theme/myAppTheme.dart';
 import 'package:ecommerce_app/core/widget/shared_preferences_utils.dart';
 import 'package:ecommerce_app/features/auth_presentations_screens/login_screen/login_screen.dart';
@@ -8,7 +9,6 @@ import 'package:ecommerce_app/features/main_screen/favourite_screen/cubit/get_fa
 import 'package:ecommerce_app/features/main_screen/favourite_screen/cubit/remove_fav_view_model.dart';
 import 'package:ecommerce_app/features/main_screen/home_screen/cubit/home_tab_view_model.dart';
 import 'package:ecommerce_app/features/products_screen/add_to_cart/cubit/add_to_cart_view_model.dart';
-import 'package:ecommerce_app/features/products_screen/cubit/products_screen_view_model.dart';
 import 'package:ecommerce_app/features/products_screen/products_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,19 +23,22 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
   await SharedPreferencesUtils.init();
-  runApp(MultiBlocProvider(
-    providers: [
-      BlocProvider<HomeTabViewModel>(create: (context)=>getIt<HomeTabViewModel>()),
-      BlocProvider<AddToCartViewModel>(create: (context)=>getIt<AddToCartViewModel>()),
-      BlocProvider<CartScreenViewModel>(create: (context)=>getIt<CartScreenViewModel>()),
-      BlocProvider<AddToFavViewModel>(create: (context)=>getIt<AddToFavViewModel>()),
-      BlocProvider<GetFavViewModel>(create: (context)=>getIt<GetFavViewModel>()),
-      BlocProvider<RemoveFavViewModel>(create: (context)=>getIt<RemoveFavViewModel>()),
-
-
-
-    ],
-      child: const MyApp()));
+  runApp(DevicePreview(
+    enabled: true,
+    builder: (context) => MultiBlocProvider(
+      providers: [
+        BlocProvider<HomeTabViewModel>(create: (context)=>getIt<HomeTabViewModel>()),
+        BlocProvider<AddToCartViewModel>(create: (context)=>getIt<AddToCartViewModel>()),
+        BlocProvider<CartScreenViewModel>(create: (context)=>getIt<CartScreenViewModel>()),
+        BlocProvider<AddToFavViewModel>(create: (context)=>getIt<AddToFavViewModel>()),
+        BlocProvider<GetFavViewModel>(create: (context)=>getIt<GetFavViewModel>()),
+        BlocProvider<RemoveFavViewModel>(create: (context)=>getIt<RemoveFavViewModel>()),
+    
+    
+    
+      ],
+        child: const MyApp()),
+  ));
 }
 
 class MyApp extends StatelessWidget {

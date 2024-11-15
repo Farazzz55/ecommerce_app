@@ -34,7 +34,7 @@ class MainScreen extends StatelessWidget{
                topRight: Radius.circular(15)
            ),
            child: SizedBox(
-             height:100.h,
+             height:120.h,
              child: BottomNavigationBar(
                currentIndex: viewModel.selectedIndex,
                onTap: (index){
@@ -47,6 +47,7 @@ class MainScreen extends StatelessWidget{
                  CustomButtomNavBar(IconPath: 'assets/images/userItem.png',title:'' ),
 
                ],
+
              ),
            ),
          ),

@@ -41,7 +41,7 @@ class TopOfPage extends StatelessWidget{
             ),
           ),
         ),
-        SizedBox(width: MediaQuery.of(context).size.width*0.05,),
+        SizedBox(width: 20.w,),
         BlocBuilder<AddToCartViewModel, ProductScreenState>(
           builder: (context, state) {
             final cartItems = AddToCartViewModel.get(context).numOfCartItem;
@@ -63,7 +63,9 @@ class TopOfPage extends StatelessWidget{
               ),
             );
           },
-        ),      ],
+        ),
+      ],
+
     );
 
   }
